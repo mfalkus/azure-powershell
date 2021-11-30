@@ -1,6 +1,6 @@
 variables:
   WindowsName: windows
-  WindowsImage: VS2017-Win2016
+  WindowsImage: windows-2019
   TestFramework: netcoreapp2.1
   TestTarget: Test
   Configuration: Debug
@@ -8,6 +8,13 @@ variables:
   IsGenerateBased: $[eq(variables['system.pullRequest.targetBranch'], 'generation')]
 
 trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+    exclude:
+      - Azs-tzl
 
 jobs:
 - job: Build
@@ -56,3 +63,19 @@ jobs:
       targetType: filePath
       filePath: tools/SecurityTools/RunBinSkim.ps1
       pwsh: true
+
+- job: Test
+  displayName: Test
+  dependsOn: Build
+  condition: and(eq(variables.IsGenerateBased, false), succeeded())
+  timeoutInMinutes: 180
+  pool:
+    vmImage: ${{ variables.WindowsImage }}
+
+  steps:
+  - template: util/test-steps.yml
+    parameters:
+      osName: ${{ variables.WindowsName }}
+      testFramework: ${{ variables.TestFramework }}
+      testTarget: ${{ variables.TestTarget }}
+      configuration: ${{ variables.Configuration }}
