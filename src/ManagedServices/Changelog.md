@@ -18,6 +18,8 @@
         - Additional information about change #1
 -->
 ## Upcoming Release
+
+## Version 3.0.0
 * Migrate the project to Autorest. Below is the new cmdlet
     - `Get-AzManagedServicesMarketplaceDefinition`
     - `New-AzManagedServicesAuthorizationObject`

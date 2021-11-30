@@ -19,6 +19,8 @@
 -->
 
 ## Upcoming Release
+
+## Version 3.0.0
 * [Breaking Change] Upgraded API version to 2021-09-01
   - Changed the type of parameter `LogAnalyticWorkspaceResourceId` in `New-AzContainerGroup` from Hashtable to String
   - Removed parameter `NetworkProfileId` in `New-AzContainerGroup`, Added `Subnet` and `Zone`

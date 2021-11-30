@@ -19,6 +19,8 @@
 -->
 
 ## Upcoming Release
+
+## Version 0.19.0
 * Updated `New-AzSynapseSqlPool` to support new parameter [-StorageAccountType]
 * Updated `Restore-AzSynapseSqlPool` to support new parameter [-Tag] and [-StorageAccountType]
 * Renamed parameter FolderName in `Set-AzSynapseSqlScript` to FolderPath and keeped FolderName as alias

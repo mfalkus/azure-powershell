@@ -18,6 +18,8 @@
         - Additional information about change #1
 -->
 ## Upcoming Release
+
+## Version 3.0.0
 * Added some breaking changes in `Get-AzAksVersion`.
     * Removed `DefaultProfile`'s alias `AzContext` and `AzureRmContext`.
     * Changed output type from `Microsoft.Azure.Commands.Aks.Models.PSOrchestratorVersionProfile` to `Microsoft.Azure.PowerShell.Cmdlets.Aks.Models.Api20190801.OrchestratorProfile`
