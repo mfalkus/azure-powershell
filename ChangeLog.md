@@ -12,8 +12,8 @@
 * Fixed the issue that 'Az.Advisor.psd1' was not signed [#16226]
 
 #### Az.Aks
-* Added some breaking changes in 'Get-AzAksVersion'.
-    * Removed 'DefaultProfile''s alias 'AzContext' and 'AzureRmContext'.
+* Introduced breaking changes to 'Get-AzAksVersion'.
+    * Removed two aliases 'AzContext' and 'AzureRmContext' of parameter 'DefaultProfile'.
     * Changed output type from 'Microsoft.Azure.Commands.Aks.Models.PSOrchestratorVersionProfile' to 'Microsoft.Azure.PowerShell.Cmdlets.Aks.Models.Api20190801.OrchestratorProfile'
 * Added 'Invoke-AzAksRunCommand' to support running a shell command (with kubectl, helm) on aks cluster. [#16104]
 * Added support of 'EnableNodePublicIp' and 'NodePublicIPPrefixID' for 'New-AzAksCluster' and 'New-AzAksNodePool'. [#15656]
@@ -49,7 +49,7 @@
     - 'Get-AzVm'
     - 'Get-AzVmss'
     - 'Get-AzVmssVm'
-    - 'New-Azvm'
+    - 'New-AzVm'
     - 'New-AzVmConfig'
     - 'New-AzVmss'
     - 'New-AzVmssConfig'
@@ -67,7 +67,7 @@
     - 'New-AzDiskConfig'
     - 'New-AzDiskUpdateConfig'
     - 'New-AzSnapshotConfig'
-* Added 'CompletionPercent' property to the PSSNapshot model so it is visible to the user.
+* Added 'CompletionPercent' property to the PSSnapshot model so it is visible to the user.
 
 #### Az.ContainerInstance
 * [Breaking Change] Upgraded API version to 2021-09-01
@@ -97,11 +97,11 @@
 * Supported storage account SKU 'Standard_GZRS' [#14633]
 
 #### Az.HDInsight
-* Add two parameters '-Zone' and '-PrivateLinkConfiguration' to cmdlet 'New-AzHDInsightCluster'
-  - Add parameter '-Zone' to cmdlet 'New-AzHDInsightCluster' to support to create cluster with availability zones feature
-  - Add parameter '-PrivateLinkConfiguration' to cmdlet 'New-AzHDInsightCluster' to support to add private link configuration when creating cluster with private link feature.
-* Add cmdlet New-AzHDInsightIPConfiguration to create ip configuration object in memory.
-* Add cmdlet New-AzHDInsightPrivateLinkConfiguration to create private link configuration object in memory.
+* Added two parameters '-Zone' and '-PrivateLinkConfiguration' to cmdlet 'New-AzHDInsightCluster'
+  - Added parameter '-Zone' to cmdlet 'New-AzHDInsightCluster' to support to create cluster with availability zones feature
+  - Added parameter '-PrivateLinkConfiguration' to cmdlet 'New-AzHDInsightCluster' to support to add private link configuration when creating cluster with private link feature.
+* Added cmdlet New-AzHDInsightIPConfiguration to create ip configuration object in memory.
+* Added cmdlet New-AzHDInsightPrivateLinkConfiguration to create private link configuration object in memory.
 * Fixed the output type in help doc of Set-AzHDInsightClusterDiskEncryptionKey cmdlet from 'Microsoft.Azure.Management.HDInsight.Models.Cluster' to  'Microsoft.Azure.Commands.HDInsight.Models.AzureHDInsightCluster' to keep consistent with the real type of returned object.
 * Breaking change:
   - Changed the type of parameter 'OSType' from 'Microsoft.Azure.Management.HDInsight.Models.OSType' to 'System.string' in cmdlet 'New-AzHDInsightCluster'.
@@ -130,13 +130,13 @@
 * Bugfix in PSAzureFirewallPolicyThreatIntelWhitelist for FirewallPolicy
 * Added optional parameter '-IsSecuritySite' to the following cmdlet:
     - 'New-AzVpnSite'
-* Support for new Match Variables in WAF Exclusions
+* Added support for new Match Variables in WAF Exclusions
 * Onboard Virtual Network Encryption to Virtual Network Cmdlets
-* Support for NAT port range parameters in VPN NAT rule resources
-	- 'New-AzVpnGatewayNatRule.md'
-	- 'Update-AzVpnGatewayNatRule.md'
-	- 'New-AzVirtualNetworkGatewayNatRule.md'
-	- 'Update-AzVirtualNetworkGatewayNatRule.md'
+* Added support for NAT port range parameters in VPN NAT rule resources
+    - 'New-AzVpnGatewayNatRule.md'
+    - 'Update-AzVpnGatewayNatRule.md'
+    - 'New-AzVirtualNetworkGatewayNatRule.md'
+    - 'Update-AzVirtualNetworkGatewayNatRule.md'
 * Added new cmdlets to support Per Rule Exclusions for Application Gateway WAF
     - 'New-AzApplicationGatewayFirewallPolicyExclusionManagedRuleSet'
     - 'New-AzApplicationGatewayFirewallPolicyExclusionManagedRuleGroup'
@@ -145,7 +145,7 @@
         - 'New-AzApplicationGatewayFirewallPolicyExclusion'
 
 #### Az.OperationalInsights
-* Expanded DatasourceType with values 'Query', 'Alerts' for cmdlets:
+* Expanded DataSourceType with values 'Query', 'Alerts' for cmdlets:
   - 'Get-AzOperationalInsightsLinkedStorageAccount'
   - 'New-AzOperationalInsightsLinkedStorageAccount'
   - 'Remove-AzOperationalInsightsLinkedStorageAccount'
@@ -198,7 +198,16 @@
 * Azure Site Recovery support for capacity reservation for Azure to Azure provider.
 
 #### Az.Resources
-
+* Added 'Get-AzProviderPreviewFeature', 'Register-AzProviderPreviewFeature' and 'Unregister-AzProviderPreviewFeature' cmdlets.
+* Fixed a bug when running Get-AzPolicyAlias with empty value of NamespaceMatch parameter [#16370]
+* [Breaking change] Migrated from AAD Graph to Microsoft Graph
+* [Breaking change] Changed the returned `Id` in PSDenyAssignment from GUID string to fully qualified ID
+* Allowed parameter `Id` in `Get-AzDenyAssignment` to accept fully qualified ID
+* Added new cmdlet `Publish-AzBicepModule` for publishing Bicep modules
+* Added deprecation message for `AssignIdentity` parameter in `*-AzPolicyAssignment` cmdlets.
+* Added support for user assigned managed identities in policy assignments by adding `IdentityType` and `IdentityId` parameters to `*-AzPolicyAssignment` cmdlets.
+* Updated policy cmdlets to use new api version 2021-06-01 that introduces support for user assigned managed identities in policy assignments.
+* Narrowed API permission when get information about active directory object for *-AzRoleAssignment [#16054]
 
 #### Az.Sql
 * Fixed FirewallRuleName wildcard filtering in 'Get-AzSqlServerFirewallRule' [#16199]
@@ -219,7 +228,7 @@
     -  'Remove-AzStorageBlobImmutabilityPolicy'
 * Supported enable/disable legal hold on a Storage blob.
     -  'Set-AzStorageBlobLegalHold'
-* Supported create storage account with enable account level immutability with versioning, and create/udpate storage account with account level immutability policy.
+* Supported create storage account with enable account level immutability with versioning, and create/update storage account with account level immutability policy.
     - 'New-AzStorageAccount'
     - 'Set-AzStorageAccount'
 
